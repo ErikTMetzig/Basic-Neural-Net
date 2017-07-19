@@ -66,6 +66,15 @@ public abstract class NeuralLayer {
           }
        }
      }
+
+  //field accessability method
+  public void setNextLayer(neuralLayer layer) {
+    this.nextLayer = layer;
   }
+  
+  //field accessability method
+  public int getNumberOfNeuronsInLayer()  {
+    return this.numberOfNeuronsInLayer;
+}
   
   
