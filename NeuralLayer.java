@@ -25,10 +25,13 @@ public abstract class NeuralLayer {
   //abstract method that is implemented in each specific layer type object
   public NeuralLayer()  {};
   
+  //sets up each neuron within the layer
   protected void init() {
   
+    //iterate through each neuron
     for(int i = 0; i < numberOfNeuronsInLayer; i++) {
-      
+     
+      //initialize the neuron or create one and initialize
       try {
         
         neuron.get(i).setActivationFunction(activationFnc);
@@ -43,13 +46,16 @@ public abstract class NeuralLayer {
       }
     }
     
+    //calculates the outputs for every neuron in the layer
     protected void calc() {
     
       for(int i = 0; i < numberOfNeuronsInLayer; i++) {
       
+        //set appropriate inputs and then calculate
         neuron.get(i).setInputs(this.input);
         neuron.get(i).calc();
         
+        //try to set appropriate value if possible, or add
         try {
           output.set(i, neuron.get(i).getOutput());
           }
