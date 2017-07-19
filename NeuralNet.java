@@ -16,4 +16,11 @@ public class NeuralNet  {
   private ArrayList<Double> input;
   private ArrayList<Double> output;
   
+  public NeuralNet(int numberofinputs, int numberofoutputs, int[] numberofhiddenneurons, IActivationFunction[] hiddenAcFnc, IActivationFunction outputAcFnc)  {
+    
+    this.numberOfInputs = numberofinputs;
+    this.numberOfOutputs = numberofoutputs;
+    
+    input = new ArrayList<>(numberofinputs);
+    inputLayer = new InputLayer(numberofinputs);
 }
