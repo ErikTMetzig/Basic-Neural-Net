@@ -6,7 +6,7 @@
 package neuralnet;
 
 //every activation function has its own calc() that spits back the output
-public interface IActivationFunction  {
+public interface Activation  {
 
   //returns the value to output
   double calc(double val);
@@ -15,7 +15,7 @@ public interface IActivationFunction  {
   double derivative(double val);
   
   //possible activation functions
-  public enum ActivationFunctionENUM  {
+  public enum ActivationENUM {
   
     STEP, LINEAR, SIGMOID, HYPERTAN
   }
