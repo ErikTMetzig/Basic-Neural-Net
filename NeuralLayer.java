@@ -22,8 +22,22 @@ public abstract class NeuralLayer {
   protected ArrayList<Double> output;
   protected int numberOfInputs;
   
-  //abstract method that is implemented in each specific layer type object
-  public NeuralLayer()  {};
+  //first constructor
+  public NeuralLayer(int numberofneurons)  {
+  
+    this.numberOfNeuronsInLayer = numberofneurons;
+    neuron = new ArrayList<>(numberofneurons);
+    output = new ArrayList<>(numberofneurons);
+  }
+  
+  //second constructor with more arguments
+  public NeuralLayer(int numberofneurons, Activation iaf) {
+    this.numberOfNeuronsInLayer = numberofneurons;
+    this.activationFnc = iaf;
+    neuron = new ArrayList<>(numberofneurons);
+    output = new ArrayList<>(numberofneurons);
+    
+  }
   
   //sets up each neuron within the layer
   protected void init() {
