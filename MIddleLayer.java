@@ -3,26 +3,42 @@
 */
 package neuralnet;
 
-public class MiddleLayer extends NeuralLayer  {
+public class MiddleLayer extends NeuronLayer  {
   
-  public HiddenLayer(int numberofneurons, IActivationFunction iaf, int numberofinputs)  {
+  /*
+  * Constructor for the middle layer
+  *
+  * @param numberofneurons - the number of neurons in this layer
+  * @param Activation iaf - the activation function for this layer
+  * @param numInputs - the number of inputs for this layer
+  */
+  public HiddenLayer(int numberofneurons, IActivationFunction iaf, int numInputs)  {
   
-    this.numberOfNeuronsInLayer = numberofneurons;
-    this.activationFnc = iaf;
-    this.numberOfInputs = numberofinputs;
+    this.numberOfInputs = numInputs;
+    super(numberofneurons, iaf);
+    init();
   }
   
-  //link the previous layer to the network
+  /*
+  * void setPreviousLayer - Links the previous layer in the network to this one
+  */
   @Override
   public void setPreviousLayer(NeuralLayer prev)  {
+    
     this.previousLayer = prev;
+    
     if(prev.nextLayer != this)
       prev.setNextLayer(this);
   }
-  //link the next layer to the network
+  
+  /*
+  * void setNextLayer - links the next layer in the network to this one
+  */
   @Override
   public void setNextLayer(NeuralLayer next)  {
+    
     nextLayer = next;
+    
     if(next.previousLayer != this)
       next.setPrevousLayer(this)
   }
