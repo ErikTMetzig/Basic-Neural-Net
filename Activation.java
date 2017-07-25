@@ -17,6 +17,6 @@ public interface Activation  {
   //possible activation functions
   public enum ActivationENUM {
   
-    STEP, LINEAR, SIGMOID, HYPERTAN
+    STEP, LINEAR, SIG, HYPERTAN
   }
 }
