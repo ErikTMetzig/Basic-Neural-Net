@@ -16,7 +16,7 @@ public class MiddleLayer extends NeuronLayer  {
   
     this.numberOfInputs = numInputs;
     super(numberofneurons, iaf);
-    init();
+    initialize();
   }
   
   /*
