@@ -8,32 +8,39 @@ package neuralnet;
 
 import java.util.*;
 
-public abstract class NeuralLayer {
+public abstract class NeuronLayer {
 
   protected int numberOfNeuronsInLayer;
   //all of the individual neurons included
   private ArrayList<Neuron> neuron;
   //the activation function for the entire layer
-  protected IActivationFunction activationFnc;
+  protected Activation Fnc;
+  
   protected NeuralLayer previousLayer;
   protected NeuralLayer nextLayer;
+ 
   //same as for individual neurons
   protected ArrayList<Double> input;
   protected ArrayList<Double> output;
   protected int numberOfInputs;
   
-  //first constructor
-  public NeuralLayer(int numberofneurons)  {
+  /*
+  * Default constructor for 1 arg
+  */
+  public NeuronLayer(int numneurons)  {
   
     this.numberOfNeuronsInLayer = numberofneurons;
     neuron = new ArrayList<>(numberofneurons);
     output = new ArrayList<>(numberofneurons);
   }
   
-  //second constructor with more arguments
-  public NeuralLayer(int numberofneurons, Activation iaf) {
-    this.numberOfNeuronsInLayer = numberofneurons;
+  /*
+  * Second constructor
+  */
+  public NeuronLayer(int numbneurons, Activation iaf) {
+    
     this.activationFnc = iaf;
+    this.numberOfNeuronsInLayer = numneurons;
     neuron = new ArrayList<>(numberofneurons);
     output = new ArrayList<>(numberofneurons);
     
@@ -42,26 +49,31 @@ public abstract class NeuralLayer {
   //sets up each neuron within the layer
   protected void init() {
   
-    //iterate through each neuron
-    for(int i = 0; i < numberOfNeuronsInLayer; i++) {
-     
-      //initialize the neuron or create one and initialize
-      try {
-        
-        neuron.get(i).setActivationFunction(activationFnc);
-        neuron.get(i).init();
-        }
-      
-      catch(IndexOutOfBoundsException iobe) {
-        
-        neuron.add(new Neuron(numberOfInputs, activationFnc));
-        neuron.get(i).init();
-        }
-      }
-    }
+    if(numberOfNeuronsInLayer >= 0) {
     
-    //calculates the outputs for every neuron in the layer
-    protected void calc() {
+      //iterate through each neuron
+      for(int i = 0; i < numberOfNeuronsInLayer; i++) {
+     
+        //initialize the neuron or create one and initialize
+        try {
+        
+          neuron.get(i).setActivationFunction(activationFnc);
+          neuron.get(i).init();
+         }
+      
+        catch(IndexOutOfBoundsException iobe) {
+        
+          neuron.add(new Neuron(numberOfInputs, activationFnc));
+          neuron.get(i).init();
+        }
+      }      
+    }
+  }
+    
+    /*
+    * void calculate - determines the output values for this layer
+    */
+    protected void calculate() {
     
       for(int i = 0; i < numberOfNeuronsInLayer; i++) {
       
