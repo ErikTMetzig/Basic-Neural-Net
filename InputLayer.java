@@ -13,8 +13,20 @@ public class InputLayer extends Layer {
     super(numberofinputs, new Lienar(1));
     previousLayer = null;
     this.numberOfInputs = numberofinputs;
-    init();
+    initialize();
     
+  }
+  
+  /*
+  * void initialize - initialize each neuron in the layer
+  */
+  @Override
+  public void initialize()  {
+  
+    for(int i = 0; i < numberOfInputs; i++) {
+      this.setNeuron(i, new InputNeuron());
+      this.getNeuron(i).initialize();
+    }
   }
   
   /*
