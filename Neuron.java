@@ -19,30 +19,30 @@ public class Neuron {
   //for recording previous neural states
   private Double outputBeforeActivation;
   //tracks size of input
-  private int numberOfInputs = 0;
+  private int numInputs = 0;
   //affects the output by a consistent amount, so when all inputs = 0, output != 0
   protected Double bias = 1.0;
   //Adds a non-linear multiplier to inputs, like Sigmoid or Hyperbolic activation
-  private IActivationFunction activationFunction;
+  private Activation activationFunction;
   
   /*
   * Constructor class for a Neuron
   * @param numberOfInputs - the number of inputs that this neuron will have to take in
   * @param iaf - The particular activation function for this neuron (ex: Sigmoid, Linear, Hard Limiting)
   */
-  public Neuron(int numberOfInputs, IActivationFunction iaf)  {
+  public Neuron(int numberOfInputs, Activation iaf)  {
   
     //set appropriate values
-    numberOfInputs = numberofinputs;
-    weight = new ArrayList<>(numberofinputs + 1);
-    input = new ArrayList<>(numberofinputs);
-    activationFunction = iaf;
+    this.numInputs = numberofinputs;
+    this.weight = new ArrayList<>(numberofinputs + 1);
+    this.input = new ArrayList<>(numberofinputs);
+    this.activationFunction = iaf;
     }
     
   /*
   * Assigns the initial values to weights by randomly generating numbers
   */
-  publc void init() {
+  publc void initialize() {
   
     Random rand = new Random();
     
@@ -65,13 +65,13 @@ public class Neuron {
   }
   
   /*
-  * Calculates the output value by summing the products of all inputs and weights, adding bias
+  * void calculate - Calculates the output value by summing the products of all inputs and weights, adding bias
   * and saving to outputBeforeActivation. The output value is then calculated by activation function.
   */
-  public void calc()  {
+  public void calculate()  {
   
     //set a default value
-    outputBeforeActivation = 0.0;
+    this.outputBeforeActivation = 0.0;
     
     //if there are actual inputs and weights, sum all inputs, weights, bias
     if(numberOfInputs > 0)  {
@@ -88,5 +88,35 @@ public class Neuron {
     //derive actual output from our calculated value
     output = activationFunction.calc(outputBeforeActivation);
   }
+  
+  /*
+  * Double calculate - secondary calculate function which adds an additional array factor
+  */
+  public Double calculate(Double[] inputArray)  {
+    
+    //if no inputs, simply calculate from activation
+    if(numInputs <= 0)
+      return Activation.calculate(0.0);
+    
+    //if inputs
+    else  {
+      
+      Double holderOutputBeforeActivation = 0.0;
+      
+      if(this.weight != null) {
+        
+        //iterate through each input and calculate
+        for(int i = 0; i < numInputs; i++)  {
+          
+          holderOutputBeforeActivation += (i == numInputs?bias:_input[i]) * weight.get(i);
+        }
+      }
+      
+      //return
+      return Activation.calculate(holderOutputBeforeActivation);
+    }
+  }
+  
+  
 }
   
