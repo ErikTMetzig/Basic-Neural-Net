@@ -177,5 +177,97 @@ public class NeuralNet  {
     }
   }
   
+  /*
+  * void setInputs - feeds an array to the network's inputs
+  */
+  public void setInputs(double[] inputArray)  {
+    
+    //throw exception if array is too big or small
+    if(inputArray.length != numInputs)
+      throw new IllegalArgumentException("Array must be of appropriate size.");
+    
+    //iterate through, add value if space or make space
+    for(int i = 0; i < numInputs; i++)  {
+      
+      try {
+        input.set(i, inputArray[i]);
+      }
+      
+      catch(IndexOutOfBoundsException iobe) {
+        input.add(inputArray[i]);
+      }
+    }
+  }
   
+  /*
+  * int getNumMiddleLayers - return the number of middle layers
+  */
+  public int getNumMiddleLayers() {
+    
+    return this.numMiddleLayers;
+  }
+  
+  
+  /*
+  * int getNumInputs - return the number of inputs
+  */
+  public int getNumInputs() {
+    
+    return this.numInputs;
+  }
+  
+  
+  /*
+  * int getNumOutputs - return the number of outputs of this net
+  */
+  public int getNumOutputs()  {
+    
+    return this.numOutputs;
+  }
+  
+  /*
+  * InputLayer getInputLayer
+  */
+  public InputLayer getInputLayer() {
+    
+    return this.inputLayer;
+  }
+  
+  
+  /*
+  * ArrayList<MiddleLayer> getMiddleLayers - return all middle layers
+  */
+  public ArrayList<MiddleLayer> getMiddleLayers() {
+    
+    return this.middleLayer;
+  }
+  
+  
+  /*
+  * MiddleLayer getMiddleLayer - return specific layer at index
+  */
+  public MiddleLayer getMiddleLayer(int i)  {
+    
+    return this.middleLayer.get(i);
+  }
+  
+  
+  /*
+  * OutputLayer getOutputLayer
+  */
+  public OutputLayer getOutputLayer() {
+    
+    return this.outputLayer;
+  }
+  
+  /*
+  * boolean getBias - returns if there is a bias to the network
+  */
+  public boolean getBias()  {
+    
+    return this.activateBias;
+  }
+  
+  
+
 }
