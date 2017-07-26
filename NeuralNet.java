@@ -338,4 +338,15 @@ public class NeuralNet  {
     
   }
 
+  /*
+  * void printStats() - print the stats of the net to the console
+  */
+  public void printStats()  {
+    
+    System.out.println("Neural Net: " + this.toString());
+    System.out.println("Inputs: " + this.numInputs);
+    System.out.println("Outputs: " + this.numOutputs);
+    System.out.println("Hidden Layers: " + this.numMiddleLayers);
+    
+  }
 }
