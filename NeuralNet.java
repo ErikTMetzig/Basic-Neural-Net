@@ -27,6 +27,13 @@ public class NeuralNet  {
   private ArrayList<Double> input;
   private ArrayList<Double> output;
   
+  /*
+  * Helper constructor - if invoked, invoke other constructor
+  */
+  public NeuralNet(int numinputs, int numoutputs, Activation outputAcFnc) {
+    
+    this(numinputs, numoutputs, new int[0], new Activation[0], outputAcFnc);
+  }
   
   /*
   * Constructor - used to establish all aspects of the neural net
@@ -86,4 +93,89 @@ public class NeuralNet  {
       }
     }
   }
+  
+  /*
+  * ArrayList<Double> getArrayInputs - return the array of inputs
+  */
+  public ArrayList<Double> getArrayInputs() {
+    
+    return input;
+  }
+  
+  /*
+  * Double getInput - return the input at the 
+  */
+  public Double getInput(int x) {
+    
+    return input.get(x);
+  }
+  
+  
+  /*
+  * Double[] getInputs - return a copy of the array of inputs
+  */
+  public Double[] getInputs() {
+    
+    Double[] returnArray = new Double[numInputs];
+    
+    //copy all values
+    for(int i = 0; i < numInputs; i++)
+      returnArray[i] = input.get(i);
+    
+    return returnArray;
+  }
+  
+  /*
+  * ArrayList<Double> getArrayOutputs - return array of outputs
+  */
+  public ArrayList<Double> getArrayOutputs()  {
+    
+    return output;
+  }
+  
+  /*
+  * double getOutput - return the output at the specified array index
+  */
+  public double getOutput(int x)  {
+    
+    return output.get(x);
+  }
+  
+  /*
+  * double[] getOutputs - return a copy of the array containing all the outputs
+  */
+  public double[] getOutputs()  {
+    
+    double[] returnArray = new double[numOutputs];
+    
+    //iterate through and copy vals
+    for(int i = 0; i < numOutputs; i++)
+      returnArray[i] = output.get(i);
+    
+    return returnArray;
+  }
+  
+ /*
+ *  void setInputs - feeds an arraylist of values to network's inputs
+ */
+  public void setInputs(ArrayList<Double> inputArrayList) {
+    
+    if(inputArrayList.size != numInputs)
+      throw new IllegalArgumentException("ArrayList must be of appropriate size.");
+    
+    for(int i = 0; i < numInputs; i++)  {
+      
+      try {
+        
+        input.set(i, inputArrayList.get(i));
+      }
+      
+      catch(IndexOutOfboundsException exc)  {
+      
+        input.add(inputArrayList.get(i));
+      }
+    }
+  }
+  
+  
 }
