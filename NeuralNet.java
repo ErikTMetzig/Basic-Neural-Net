@@ -269,5 +269,73 @@ public class NeuralNet  {
   }
   
   
+  /*
+  * void activateBias - for each neuron in the network, activate bias (fix!)
+  */
+  public void activateBias()  {
+    
+    //iterate through each layer
+    for(int i = 0; i < middleLayer.size(); i++) {
+      
+      //iterate through each neuron
+      for(int j = 0; j < middleLayer.get(i).getNumNeurons; j++) {
+        
+        //activate
+        middleLayer.get(i).get(j).activateBias();
+      }
+    }
+    
+    //iterate through each neuron in the output layer and activate
+    for(int i = 0; i < outputLayer.size(); i++) {
+      
+      outputLayer.get(i).activateBias();
+    }
+  }
+  
+  /*
+  * void deactivateBias() - reverse of activateBias()
+  */
+  public void deactivateBias()  {
+    
+    //iterate through each layer
+    for(int i = 0; i < middleLayer.size(); i++) {
+      
+      //iterate through each neuron
+      for(int j = 0; j < middleLayer.get(i).getNumNeurons; j++) {
+        
+        //deactivate
+        middleLayer.get(i).get(j).deactivateBias();
+      }
+    }
+    
+    //iterate through each neuron in the output layer and deactivate
+    for(int i = 0; i < outputLayer.size(); i++) {
+      
+      outputLayer.get(i).deactivateBias();
+    }
+  }
+  
+  /*
+  * void calculate() - determines the outputs of each layer and passes to successive layer
+  */
+  public void calculate() {
+    
+    //handle input layer  
+    inputLayer.setInputs(input);
+    inputLayer.calculate();
+    
+    //handle middle layers
+    for(int i = 0; i < numMiddleLayers; i++)  {
+      
+      middleLayer.get(i).setInputs(middeLayer.get(i).getPreviousLayer().getOutputs());
+      middleLayer.get(i).calculate();
+    }
+    
+    //handle output
+    outputLayer.setInputs(outputLayer.getPreviousLayer().getOutputs());
+    outputLayer.calculate();
+    this.output = outputLayer.getOutputs();
+    
+  }
 
 }
